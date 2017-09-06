@@ -1,6 +1,21 @@
-var MetaCoin = artifacts.require("./MetaCoin.sol");
+var Splitter = artifacts.require("./Splitter.sol");
 
-contract('MetaCoin', function(accounts) {
+contract('Splitter', function(accounts) {
+  console.log(accounts);  
+
+  it("should have the Alice's address as the owner of the contract", function () { 
+    return Splitter.deployed().then(function(instance) {
+      return instance.alice.call();
+    }).then(function(alice) {
+      assert.equal(alice, accounts[0], "Alice's address is not the owner's address")
+    })
+    
+  })
+
+});
+  
+  /* Reference Material
+
   it("should put 10000 MetaCoin in the first account", function() {
     return MetaCoin.deployed().then(function(instance) {
       return instance.getBalance.call(accounts[0]);
@@ -60,4 +75,4 @@ contract('MetaCoin', function(accounts) {
       assert.equal(account_two_ending_balance, account_two_starting_balance + amount, "Amount wasn't correctly sent to the receiver");
     });
   });
-});
+*/

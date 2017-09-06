@@ -7,7 +7,7 @@ This contract receives an amount of ether from a sender, and splits it
 evenly between two other recipients.
 
 It should:
- 1. Have a sender address, Alice's address
+ 1. Have a sender address, Alice's address (Owner's address)
  2. Have two recipients addresses, Bob and Carol's addresses
  3. Have two balance accounts, one each for Bob and Carol
  4. Have functions for paying out to Bob or Carol
@@ -23,12 +23,15 @@ Unhappy Paths:
 */
 
 contract Splitter {
-	mapping (address => uint) balances;
-	address Alice;
-	address Bob;
-	address Carol;
+	address public alice;
+	address public bob;
+	address public carol;
 
 
+	function Splitter(address recipient_bob, address recipient_carol) {
+		alice = msg.sender;
+
+	}
 /* Reference material
 
 	event Transfer(address indexed _from, address indexed _to, uint256 _value);
