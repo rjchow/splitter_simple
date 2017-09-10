@@ -27,13 +27,13 @@ contract Splitter {
 	address public bob;
 	address public carol;
 
-	uint public alice_balance;
-	uint public bob_balance;
-	uint public carol_balance;
-
 	mapping (address => uint) public balances;
 
 	event LogWithdrawal(address withdrawer, uint amount);
+
+	function Splitter() {
+		alice = msg.sender;
+	}
 
 	function () payable {
 		require(msg.sender == alice);
@@ -47,11 +47,6 @@ contract Splitter {
 		if (msg.value % 2 == 1) {
 			balances[alice] += 1;
 		}
-	}
-
-
-	function Splitter(address recipient_bob, address recipient_carol) {
-		alice = msg.sender;
 	}
 
 	function getBalance(address person) 
